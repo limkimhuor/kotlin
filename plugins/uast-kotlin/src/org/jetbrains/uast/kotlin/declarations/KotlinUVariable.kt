@@ -183,6 +183,15 @@ open class KotlinUParameter(
         }
     }
 
+    override val annotations: List<UAnnotation> by lz {
+        val superAnnotations = super.annotations
+        if (sourcePsi is KtTypeReference)
+        //TODO: AnnotationUseSiteTarget.RECEIVER and try better way
+            sourcePsi.annotationEntries.map { KotlinUAnnotation(it, this) } + superAnnotations
+        else
+            superAnnotations
+    }
+
     override fun getInitializer(): PsiExpression? {
         return super<AbstractKotlinUVariable>.getInitializer()
     }

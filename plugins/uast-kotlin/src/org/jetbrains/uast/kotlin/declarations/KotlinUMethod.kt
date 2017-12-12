@@ -60,7 +60,14 @@ open class KotlinUMethod(
     }
 
     override val uastParameters by lz {
-        psi.parameterList.parameters.map { KotlinUParameter(it, (it as? KtLightElement<*, *>)?.kotlinOrigin, this) }
+        psi.parameterList.parameters.mapIndexed { i, it ->
+            //TODO: maybe something more Kotlin
+            var paramSourcePsi = (it as? KtLightElement<*, *>)?.kotlinOrigin
+            if (paramSourcePsi == null && i == 0) {
+                paramSourcePsi = (sourcePsi as? KtCallableDeclaration)?.receiverTypeReference
+            }
+            KotlinUParameter(it, paramSourcePsi, this)
+        }
     }
 
     override val uastAnchor: UElement

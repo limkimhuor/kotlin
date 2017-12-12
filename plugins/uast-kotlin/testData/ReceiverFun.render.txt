@@ -1,0 +1,6 @@
+public final class ReceiverFunKt {
+    public static final fun foo(@MyAnnotation @null $receiver: java.lang.String) : int = this.length
+}
+
+public abstract annotation MyAnnotation {
+}
