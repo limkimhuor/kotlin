@@ -4,6 +4,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class MyJavaClass {
+    public MyJavaClass() {}
+
+    // Constructor with sam conversion for step into test
+    public MyJavaClass(Runnable runnable) {}
+
     public void testFun() {
        int i = 1;
     }
